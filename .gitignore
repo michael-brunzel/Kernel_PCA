@@ -7,4 +7,6 @@ data/
 
 old_code/
 
+*.py[co]
+
 
