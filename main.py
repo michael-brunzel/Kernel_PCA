@@ -7,8 +7,8 @@ import importlib
 #importlib.reload(plot_utils)
 
 def main():
-    X,y = create_and_plot_data(n_samples=100, file_name='data/SpaCy_Prepped_Data.pkl', other_data=True)
-    kpca = Kernel_PCA(data=X, n_components=2, kernel_type='rbf', gamma=0.5)
+    X,y = create_and_plot_data(n_samples=100, moons=True)
+    kpca = Kernel_PCA(data=X, n_components=2, kernel_type='rbf', gamma=15)
     X_pc_scaled, X_pc, sel_eigvals = kpca.compute_kernel_pcs()
 
     oos_proj_points = kpca.project_new_point(x_new=X[:20])

@@ -9,9 +9,9 @@ import matplotlib.pyplot as plt
 from sklearn.datasets import make_moons, make_circles, make_swiss_roll
 from sklearn.metrics.pairwise import polynomial_kernel, pairwise_distances
 
+#TODO: Implement the polynomial kernel
 
 class Kernel_PCA():
-    #TODO: Implement the polynomial kernel
 
     def __init__(self, data, n_components, kernel_type='rbf', gamma=15):
         self.data = data
@@ -76,56 +76,6 @@ class Kernel_PCA():
         return k_centered.dot(self.sel_eigvecs/ np.sqrt(self.sel_eigvals))
 
         
-
-if __name__ == "__main__":
-    
-    #X, y = make_moons(n_samples=10, random_state=123)
-
-    X, y = make_circles(n_samples=100, random_state=123, noise=0.1, factor=0.2)
-    #X, color = make_swiss_roll(n_samples=800, random_state=123)
-
-    plt.style.use('dark_background')
-    plt.figure(figsize=(10,8))
-
-    plt.scatter(X[y==0, 0], X[y==0, 1], color='red', alpha=0.5)
-    plt.scatter(X[y==1, 0], X[y==1, 1], color='blue', alpha=0.5)
-    #plt.scatter(X[:, 0], X[:, 1], c=color, cmap=plt.cm.rainbow)
-
-    plt.title('A nonlinear 2Ddataset')
-    plt.ylabel('y coordinate')
-    plt.xlabel('x coordinate')
-
-    plt.show()
-
-    X_X_trans = X.dot(X.T)
-    eigvals_new, eigvecs_new = eigh(X_X_trans) # Probe: wenn man XX^t zerlegt hat man auch nur zwei eigenwerte/eigenvektoren --> X hat hier Rang 2!
-
-    # die eigenvektoren von K müssen noch mit den singulärwerten von K skaliert werden (nur dann sind es wirklich die projektionen!!)
-    # X_pc_scaled = X_pc.dot(np.diag(np.sqrt(eigvals[::-1][:2])))
-
-    kpca = Kernel_PCA(data=X, n_components=2, kernel_type='rbf', gamma=5)
-    X_pc_scaled, X_pc, sel_eigvals = kpca.compute_kernel_pcs()
-
-    plt.style.use('dark_background')
-    plt.figure(figsize=(10,8))
-    plt.scatter(X_pc_scaled[y==0, 0], X_pc_scaled[y==0, 1], color='red', alpha=0.5)
-    plt.scatter(X_pc_scaled[y==1, 0], X_pc_scaled[y==1, 1], color='blue', alpha=0.5)
-
-    #plt.scatter(X_pc_scaled[y==0, 0], np.zeros([50]), color='red', alpha=0.5)
-    #plt.scatter(X_pc_scaled[y==1, 0], np.zeros([50]), color='blue', alpha=0.5)
-    plt.scatter(kpca.project_new_point(x_new=X[:22])[:,0], kpca.project_new_point(x_new=X[0:22])[:,1], color="white", alpha=1, marker="+")
-
-    #plt.scatter(X_pc_scaled[:, 0], X_pc_scaled[:, 1], c=color, cmap=plt.cm.rainbow)
-
-    plt.title('First 2 principal components after Kernel PCA')
-    #plt.text(-0.18, 0.18, 'gamma = 15', fontsize=12)
-    plt.xlabel('PC1')
-    plt.ylabel('PC2')
-    plt.show()
-
-    # projection of the "new" datapoint --> die eigenvektoren von K müssen mit 1/singulärwerte skaliert werden! 
-
-
 
 
     
