@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from sklearn.datasets import make_moons, make_circles, make_swiss_roll
 from sklearn.metrics.pairwise import polynomial_kernel, pairwise_distances
 
-#TODO: Implement the polynomial kernel
+#TODO: Implement the polynomial kernel as an additional option 
 
 class Kernel_PCA():
 
@@ -61,7 +61,8 @@ class Kernel_PCA():
 
         assert all(self.sel_eigvals>0.001), "Some Eigenvalues are 0!"
 
-        # Scale the Eigenvectors of the Kernelmatrix with the Singularvalues to obtain the projected lower-dimensional coordinates (Principal Components)
+        # Scale the Eigenvectors of the Kernelmatrix with the Singularvalues to obtain
+        # the projected lower-dimensional coordinates (Principal Components)
         proj_coordinates = self.sel_eigvecs.dot(np.diag(np.sqrt(self.sel_eigvals)))
 
         return proj_coordinates, self.sel_eigvecs, self.sel_eigvals

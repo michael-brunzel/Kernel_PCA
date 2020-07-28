@@ -31,7 +31,7 @@ def create_and_plot_data(n_samples, file_name=None, circles=False, moons=False, 
         data, label = pickle.load(open(str(file_name),'rb'))
 
     else:
-       return "Select Dataset!"
+        return "Select Dataset!"
 
     plot_points(data=data, label=label)
 
