@@ -6,6 +6,7 @@ import pickle
 
 
 def plot_points(data, label, oos_proj_data=None, project_new_data=False):
+    # Plot the non-linear 2D data
     plt.style.use('dark_background')
     plt.figure(figsize=(10,8))
 
