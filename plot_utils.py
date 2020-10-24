@@ -20,7 +20,7 @@ def plot_points(data, label, oos_proj_data=None, project_new_data=False):
     plt.show()
 
 def create_and_plot_data(n_samples, file_name=None, circles=False, moons=False, other_data=False):
-
+    # creates the different datasets and the respective plots
     if circles:
         data, label = make_circles(n_samples=n_samples, random_state=123, noise=0.1, factor=0.2)
 
